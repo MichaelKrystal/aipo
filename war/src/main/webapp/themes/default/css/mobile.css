@@ -1346,6 +1346,36 @@ table tr.caption {
 .radioBlock input[type="radio"] {
 	vertical-align: 0;
 }
+
+/***************************************************
+	auiInfo
+--------------------------------------------------*/
+.auiInfo {
+  min-width: 0;
+  margin: 10px 5px;
+}
+
+.auiInfoClose {
+  width: auto;
+}
+
+.auiInfoClose a {
+  width: 30px;
+  text-align: center;
+}
+
+.auiInfoTitle {
+  float: none;
+  width: 100%;
+}
+
+.auiInfoBody {
+  border-top: solid 1px #d2d2d2;
+  border-left: none;
+  padding: 10px 0 0;
+  margin: 10px 0 0;
+}
+
 /***************************************************
 	mobile class - undermost
 --------------------------------------------------*/
