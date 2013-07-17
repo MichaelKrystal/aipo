@@ -203,13 +203,20 @@ function appsNaviSwitch() {
 #ALtabElementMaximize("AddressBook" "icon-compass")
 #ALtabElementMaximize("UserList" "icon-group")
 #ALtabElementMaximize("Memo" "icon-pencil")
+</ul>
+</div>
+#if($menus && $menus.size()>0)
+<div class="anApps">
+<h2>追加アプリ</h2>
+<ul>
 #foreach($tab in $menus)
 	#if($tab.Name.toString() == "GadgetsTemplate")
-	<li><a href="$!utils.escapeXML($tab.MaximizeLink)"><i class="auiMbIcon"></i><span>$tab.Title</span></a></li>
+	<li><a href="$!utils.escapeXML($tab.MaximizeLink)"><span class="icon"><img src="$tab.Icon" width="16" height="16" alt="$tab.Title" /></span>$tab.Title</a></li>
 	#end
 #end
-                </ul>
-        </div>
+</ul>
+</div>
+#end
         <div class="anSetting">
                 <h2>$l10n.WAR_SET_UP</h2>
                 <ul>
