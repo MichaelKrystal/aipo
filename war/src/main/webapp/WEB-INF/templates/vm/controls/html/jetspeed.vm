@@ -206,11 +206,15 @@ function appsNaviSwitch() {
 </ul>
 </div>
 #if($menus && $menus.size()>0)
-<div class="anApps">
-<h2>追加アプリ</h2>
-<ul>
+#set($anApps=false)
 #foreach($tab in $menus)
 	#if($tab.Name.toString() == "GadgetsTemplate")
+       #if($anApps == false)
+		<div class="anApps">
+   		  <h2>追加アプリ</h2>
+    	 <ul>
+    	 #set($anApps=true)
+      #end
 	<li><a href="$!utils.escapeXML($tab.MaximizeLink)"><span class="icon"><img src="$tab.Icon" width="16" height="16" alt="$tab.Title" /></span>$tab.Title</a></li>
 	#end
 #end

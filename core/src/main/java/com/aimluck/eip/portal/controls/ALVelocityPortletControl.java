@@ -66,10 +66,14 @@ import org.apache.turbine.util.TurbineException;
 import org.apache.velocity.context.Context;
 
 import com.aimluck.commons.field.ALStringField;
+import com.aimluck.eip.common.ALApplication;
 import com.aimluck.eip.common.ALEipConstants;
 import com.aimluck.eip.common.ALEipInformation;
 import com.aimluck.eip.common.ALFunction;
+import com.aimluck.eip.orm.query.ResultList;
 import com.aimluck.eip.services.accessctl.ALAccessControlConstants;
+import com.aimluck.eip.services.social.ALApplicationService;
+import com.aimluck.eip.services.social.model.ALApplicationGetRequest;
 import com.aimluck.eip.util.ALCommonUtils;
 import com.aimluck.eip.util.ALEipUtils;
 
@@ -573,6 +577,9 @@ public class ALVelocityPortletControl extends AbstractPortletControl {
   private List<PortletTab> getMenus(Portlets portlets, RunData rundata,
       Context context) {
     List<PortletTab> tabs = new ArrayList<PortletTab>();
+    ResultList<ALApplication> apps =
+      ALApplicationService.getList(new ALApplicationGetRequest()
+        .withStatus(ALApplicationGetRequest.Status.ACTIVE));
     // PanedPortletController controller =
     // (PanedPortletController) portlets.getController();
 
@@ -614,6 +621,18 @@ public class ALVelocityPortletControl extends AbstractPortletControl {
                 JetspeedResources.PATH_ACTION_KEY,
                 "controls.Maximize");
           tab.setMaximizeLink(duri.toString());
+          if ("GadgetsTemplate".equals(tab.getName().toString())) {
+            for (ALApplication app : apps) {
+              if (app.getTitle().toString().equals(tab.getTitle().toString())) {
+                ALApplication gadgetApp =
+                  ALApplicationService.get(new ALApplicationGetRequest()
+                    .withAppId(app.getAppId().getValue()));
+                tab.setIcon(gadgetApp.getIcon().getValue());
+                break;
+              }
+            }
+          }
+
         } catch (Exception e) {
           logger.warn("[ALVelocityPortletControl]", e);
         }
@@ -907,6 +926,8 @@ public class ALVelocityPortletControl extends AbstractPortletControl {
 
     private String id = null;
 
+    private final ALStringField icon = new ALStringField();
+
     // private final String paneid = null;
 
     private boolean authority = true;
@@ -983,6 +1004,14 @@ public class ALVelocityPortletControl extends AbstractPortletControl {
 
     public void setAuthority(boolean flg) {
       authority = flg;
+    }
+
+    public ALStringField getIcon() {
+      return this.icon;
+    }
+
+    public void setIcon(String icon) {
+      this.icon.setValue(icon);
     }
 
   }
