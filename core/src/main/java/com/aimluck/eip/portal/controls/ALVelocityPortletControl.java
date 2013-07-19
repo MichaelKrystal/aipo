@@ -72,6 +72,7 @@ import com.aimluck.eip.common.ALEipInformation;
 import com.aimluck.eip.common.ALFunction;
 import com.aimluck.eip.orm.query.ResultList;
 import com.aimluck.eip.services.accessctl.ALAccessControlConstants;
+import com.aimluck.eip.services.orgutils.ALOrgUtilsService;
 import com.aimluck.eip.services.social.ALApplicationService;
 import com.aimluck.eip.services.social.model.ALApplicationGetRequest;
 import com.aimluck.eip.util.ALCommonUtils;
@@ -192,6 +193,7 @@ public class ALVelocityPortletControl extends AbstractPortletControl {
     context.put("conf", getConfig());
     context.put("skin", portlet.getPortletConfig().getPortletSkin());
     context.put("utils", new ALCommonUtils());
+    context.put("theme", ALOrgUtilsService.getTheme());
     try {
       context.put("runs", getPortletList(rundata));
     } catch (NullPointerException e) {

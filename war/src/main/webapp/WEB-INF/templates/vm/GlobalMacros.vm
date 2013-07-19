@@ -575,10 +575,10 @@ $item.get(0)
 	<div id="roundWrapper">
 		<div id="mobileHeader" class="clearfix">
 		<div class="inner">
-		<h1>$!portlet.Title</h1>
+		<h1>#if($!portlet.Title != "")$!portlet.Title #else $title #end</h1>
 		<div id="auiMbBtnNavi" class="mhLeft">
 			<a href="javascript:void(0)" class="auiMbBtn auiMbBtnNavi" onClick="appsNaviSwitch()">
-				<img src="themes/$!result.Theme/images/mobile/an_list.png" width="24" height="24" />
+				<img src="themes/${theme}/images/mobile/an_list.png" width="24" height="24" />
 			</a>
 		</div>
 		<div class="mhRight">
